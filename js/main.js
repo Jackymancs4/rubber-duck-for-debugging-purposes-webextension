@@ -1,15 +1,20 @@
-let biggerHelpElement = document.getElementById("bigger-help")
+let browserScope = (typeof browser !== 'undefined') ? browser : chrome
 
-if (biggerHelpElement) {
+let biggerHelpElement = document.getElementById("bigger-help")
+let whatElement = document.getElementById("what")
+
+if (biggerHelpElement && typeof chrome !== 'undefined') {
     biggerHelpElement.onclick = (e) => {
-        if(browser) {
-            browser.tabs.create({
-                url: browser.runtime.getURL("../duck.html")
-            })
-        } else if(chrome) {
-            chrome.tabs.create({
-                url: chrome.runtime.getURL("../duck.html")
-            })
-        }
+        browserScope.tabs.create({
+            url: browserScope.runtime.getURL("../duck.html")
+        })
+    }
+}
+
+if (whatElement && typeof chrome !== 'undefined') {
+    whatElement.onclick = (e) => {
+        browserScope.tabs.create({
+            url: "https://rubberduckdebugging.com/"
+        })
     }
 }
